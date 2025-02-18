@@ -26,11 +26,11 @@ Configure o .env com os detalhes do banco:
 
 ```bash
 DB_CONNECTION=pgsql
-DB_HOST=127.0.0.1
+DB_HOST=172.21.0.2
 DB_PORT=5432
-DB_DATABASE=nome_do_banco
-DB_USERNAME=seu_usuario
-DB_PASSWORD=sua_senha
+DB_DATABASE=mese
+DB_USERNAME=laravel
+DB_PASSWORD=senha
 ```
 O banco de dados está rodando em um contêiner Docker. Para criá-lo use: 
 
