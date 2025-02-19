@@ -26,7 +26,7 @@ Configure o .env com os detalhes do banco:
 
 ```bash
 DB_CONNECTION=pgsql
-DB_HOST=172.21.0.2
+DB_HOST=postgres
 DB_PORT=5432
 DB_DATABASE=mese
 DB_USERNAME=laravel
@@ -37,12 +37,15 @@ O banco de dados está rodando em um contêiner Docker. Para criá-lo use:
 ```bash
 docker-compose up -d --build
 ```
-Caso as tabelas do banco de dados não estejam criadas, use o comando: 
+Para visualizar as tabelas você pode obtar por uma extensão ou um software de sua preferência. No meu caso, eu utilizei o Beekeeper Studio, mas da pra ver também as tabelas usando os seguintes comandos dentro do Docker Desktop: 
 
 ```bash
-docker-compose exec app php artisan migrate
+# Entra dentro do banco de dados para usar comandos SQL
+psql -U laravel -d mese
+
+# Mostra a estrutura de tabelas geradas
+\dt
 ```
-Para visualizar as tabelas você pode obtar por uma extensão ou um software de sua preferência. No meu caso, eu utilizei o Beekeeper Studio.
 
 Depois de subir o banco de dados basta rodar o comando: 
 
