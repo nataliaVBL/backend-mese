@@ -23,3 +23,4 @@ RUN chmod -R 777 storage bootstrap/cache
 # Instalar dependências do Laravel
 RUN composer install --no-dev --prefer-dist --no-interaction
 
+
