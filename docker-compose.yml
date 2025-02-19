@@ -19,3 +19,31 @@ services:
       - ./docker/postgres-data:/var/lib/postgresql/data
     networks:
       - mese_network
+
+  app: 
+      build: . 
+      container_name: laravel_mese
+      working_dir: /var/www
+      volumes:
+        - .:/var/www
+        - .env:/var/www/.env
+      depends_on:
+        - postgres
+      ports: 
+        - "8000:8000"
+      entrypoint: >
+        sh -c "
+        echo 'Aguardando PostgreSQL...';
+        until pg_isready -h postgres -p 5432;
+        do
+          echo 'Esperando o banco de dados...';
+          sleep 5;
+        done;
+        echo 'Banco de dados está pronto!';
+        composer install --no-dev --prefer-dist --no-interaction;
+        php artisan config:clear;
+        php artisan config:cache;
+        php artisan migrate:fresh --force;
+        php artisan serve --host=0.0.0.0 --port=8001"
+      networks:
+        - mese_network
